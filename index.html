@@ -44,6 +44,20 @@
     body {
     background-color: #add8e6; /* Light blue */
 }
+    @keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.icon-button img:hover {
+  animation: bounce 0.5s;
+}
+
+
 
 
 
