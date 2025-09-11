@@ -1,0 +1,20 @@
+"name": "YouTube",
+        "url": "https://www.youtube.com",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
+    },
+    {
+        "name": "Gmail",
+        "url": "https://mail.google.com",
+        "img": "https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r2.png"
+    },
+    {
+        "name": "StockX",
+        "url": "https://www.stockx.com",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/StockX_Logo.svg/2560px-StockX_Logo.svg.png"
+    },
+    {
+        "name": "Classroom",
+        "url": "https://classroom.google.com",
+        "img": "https://ssl.gstatic.com/classroom/ic_product_classroom_48.png"
+    }
+]
