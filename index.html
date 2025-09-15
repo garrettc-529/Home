@@ -1,40 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My Quick Links</title>
-    <style>
-        /* Set background color for the page */
-        body {
-            background-color: #add8e6; /* Light blue */
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        /* Style the buttons */
-        .icon-button {
-            display: inline-block;
-            margin: 10px;
-            text-align: center;
-        }
-
-        .icon-button img {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
-            transition: transform 0.2s;
-        }
-
-        .icon-button img:hover {
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Quick Links</title>
+    <!-- Google Font: Press Start 2P -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
     <style>
         body {
             background-color: #add8e6;
-            font-family: Arial, sans-serif;
+            font-family: 'Press Start 2P', monospace;
             text-align: center;
             padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 40px;
         }
 
         .icon-button {
@@ -42,6 +24,8 @@
             margin: 15px;
             text-align: center;
             text-decoration: none;
+            color: inherit;
+            width: 100px;
         }
 
         .icon-button img {
@@ -49,6 +33,11 @@
             height: 80px;
             border-radius: 15px;
             transition: transform 0.3s ease;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
         .icon-button img:hover {
@@ -59,6 +48,59 @@
         .label {
             display: block;
             margin-top: 8px;
-            font-size: 14px;
-            color
+            font-size: 10px;
+            color: #333;
+            user-select: none;
+        }
 
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Favorite Websites</h1>
+
+    <a href="https://www.google.com/chrome/" target="_blank" class="icon-button" aria-label="Google Chrome">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome" />
+        <span class="label">Chrome</span>
+    </a>
+
+    <a href="https://mail.google.com/" target="_blank" class="icon-button" aria-label="Gmail">
+        <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r2.png" alt="Gmail" />
+        <span class="label">Gmail</span>
+    </a>
+
+    <a href="https://classroom.google.com/" target="_blank" class="icon-button" aria-label="Google Classroom">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" alt="Classroom" />
+        <span class="label">Classroom</span>
+    </a>
+
+    <a href="https://www.nike.com/" target="_blank" class="icon-button" aria-label="Nike">
+        <img src="https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo.png" alt="Nike" />
+        <span class="label">Nike</span>
+    </a>
+
+    <a href="https://www.youtube.com/" target="_blank" class="icon-button" aria-label="YouTube">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube" />
+        <span class="label">YouTube</span>
+    </a>
+
+    <a href="https://sites.google.com/site/unblockedgames77/" target="_blank" class="icon-button" aria-label="Unblocked Games">
+        <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Unblocked Games" />
+        <span class="label">Games</span>
+    </a>
+
+    <a href="https://www.autotrader.com/" target="_blank" class="icon-button" aria-label="Autotrader">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Autotrader_logo_2019.png" alt="Autotrader" />
+        <span class="label">Autotrader</span>
+    </a>
+
+</body>
+</html>
