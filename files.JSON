@@ -28,3 +28,63 @@
             transform: scale(1.1);
             animation: bounce 0.4s;
         }
+
+        .label {
+            display: block;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Favorite Websites</h1>
+
+    <!-- Chrome -->
+    <a href="https://www.google.com/chrome/" target="_blank" class="icon-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome">
+        <span class="label">Chrome</span>
+    </a>
+
+    <!-- Gmail -->
+    <a href="https://mail.google.com/" target="_blank" class="icon-button">
+        <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r2.png" alt="Gmail">
+        <span class="label">Gmail</span>
+    </a>
+
+    <!-- Google Classroom -->
+    <a href="https://classroom.google.com/" target="_blank" class="icon-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" alt="Classroom">
+        <span class="label">Classroom</span>
+    </a>
+
+    <!-- Nike -->
+    <a href="https://www.nike.com/" target="_blank" class="icon-button">
+        <img src="https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo.png" alt="Nike">
+        <span class="label">Nike</span>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/" target="_blank" class="icon-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube">
+        <span class="label">YouTube</span>
+    </a>
+
+    <!-- Unblocked Games G+ -->
+    <a href="https://sites.google.com/site/unblockedgames77/" target="_blank" class="icon-button">
+        <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Games">
+        <span class="label">Unblocked Games</span>
+    </a>
+
+</body>
+</html>
