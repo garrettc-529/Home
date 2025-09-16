@@ -1,106 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Quick Links</title>
-    <!-- Google Font: Press Start 2P -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #add8e6;
-            font-family: 'Press Start 2P', monospace;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Quick Links</title>
+  <!-- Google Font: Press Start 2P -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #add8e6;
+      font-family: 'Press Start 2P', monospace;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      position: relative; /* for fixed buttons */
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+      color: #333;
+    }
 
-        h1 {
-            margin-bottom: 40px;
-        }
+    body.dark {
+      background-color: #121212;
+      color: #eee;
+    }
 
-        .icon-button {
-            display: inline-block;
-            margin: 15px;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            width: 100px;
-        }
+    h1 {
+      margin-bottom: 40px;
+    }
 
-        .icon-button img {
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            transition: transform 0.3s ease;
-            object-fit: contain;
-            background: white;
-            padding: 10px;
-            box-sizing: border-box;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }
+    .icon-button {
+      display: inline-block;
+      margin: 15px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      width: 100px;
+    }
 
-        .icon-button img:hover {
-            transform: scale(1.1);
-            animation: bounce 0.4s;
-        }
+    .icon-button img {
+      width: 80px;
+      height: 80px;
+      border-radius: 15px;
+      transition: transform 0.3s ease;
+      object-fit: contain;
+      background: white;
+      padding: 10px;
+      box-sizing: border-box;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
 
-        .label {
-            display: block;
-            margin-top: 8px;
-            font-size: 10px;
-            color: #333;
-            user-select: none;
-        }
+    .icon-button img:hover {
+      transform: scale(1.1);
+      animation: bounce 0.4s;
+    }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-    </style>
+    .label {
+      display: block;
+      margin-top: 8px;
+      font-size: 10px;
+      user-select: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Bottom-right red button */
+    .corner-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #FF0000; /* YouTube red */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .corner-button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Play icon inside the button */
+    .corner-button svg {
+      fill: white;
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Dark mode switch top-left */
+    .switch-container {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1100;
+      user-select: none;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: 0.4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Live date/time */
+    #liveDateTime {
+      margin-top: 10px;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    /* Tic Tac Toe */
+    #ticTacToe {
+      margin-top: 40px;
+    }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      grid-template-rows: repeat(3, 60px);
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .cell {
+      background: white;
+      border: 2px solid #333;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+      transition: background-color 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+    }
+
+    body.dark .cell {
+      background: #333;
+      border-color: #eee;
+      color: #eee;
+    }
+
+    .cell.disabled {
+      cursor: default;
+      opacity: 0.6;
+    }
+
+    #status {
+      margin-bottom: 10px;
+      font-size: 16px;
+      height: 24px;
+    }
+
+    #resetBtn {
+      background-color: #2196F3;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    #resetBtn:hover {
+      background-color: #0b7dda;
+    }
+
+    /* Lo-fi player bottom-left */
+    #lofiPlayer {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: rgba(255 255 255 / 0.85);
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-family: 'Press Start 2P', monospace;
+      user-select: none;
+      z-index: 1100;
+      color: #333;
+    }
+
+    body.dark #lofiPlayer {
+      background-color: rgba(50 50 50 / 0.85);
+      color: #eee;
+    }
+
+    #playPauseBtn {
+      background: #2196F3;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      padding: 6px 10px;
+      font-size: 14px;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    #playPauseBtn:hover {
+      background-color: #0b7dda;
+    }
+
+    #volumeControl {
+      width: 80px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>My Favorite Websites</h1>
+  <!-- Dark Mode Toggle -->
+  <div class="switch-container" title="Toggle Dark Mode">
+    <label class="switch" aria-label="Toggle Dark Mode">
+      <input type="checkbox" id="darkModeToggle" aria-checked="false" />
+      <span class="slider"></span>
+    </label>
+  </div>
 
-    <a href="https://www.google.com/chrome/" target="_blank" class="icon-button" aria-label="Google Chrome">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome" />
-        <span class="label">Chrome</span>
-    </a>
+  <h1>My Favorite Websites</h1>
 
-    <a href="https://mail.google.com/" target="_blank" class="icon-button" aria-label="Gmail">
-        <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r2.png" alt="Gmail" />
-        <span class="label">Gmail</span>
-    </a>
+  <a href="https://www.google.com/chrome/" target="_blank" class="icon-button" aria-label="Google Chrome">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome" />
+    <span class="label">Chrome</span>
+  </a>
 
-    <a href="https://classroom.google.com/" target="_blank" class="icon-button" aria-label="Google Classroom">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" alt="Classroom" />
-        <span class="label">Classroom</span>
-    </a>
+  <a href="https://mail.google.com/" target="_blank" class="icon-button" aria-label="Gmail">
+    <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r2.png" alt="Gmail" />
+    <span class="label">Gmail</span>
+  </a>
 
-    <a href="https://www.nike.com/" target="_blank" class="icon-button" aria-label="Nike">
-        <img src="https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo.png" alt="Nike" />
-        <span class="label">Nike</span>
-    </a>
+  <a href="https://classroom.google.com/" target="_blank" class="icon-button" aria-label="Google Classroom">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" alt="Classroom" />
+    <span class="label">Classroom</span>
+  </a>
 
-    <a href="https://www.youtube.com/" target="_blank" class="icon-button" aria-label="YouTube">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube" />
-        <span class="label">YouTube</span>
-    </a>
+  <a href="https://www.nike.com/" target="_blank" class="icon-button" aria-label="Nike">
+    <img src="https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo.png" alt="Nike" />
+    <span class="label">Nike</span>
+  </a>
 
-    <a href="https://sites.google.com/site/unblockedgames77/" target="_blank" class="icon-button" aria-label="Unblocked Games">
-        <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Unblocked Games" />
-        <span class="label">Games</span>
-    </a>
+  <a href="https://www.youtube.com/" target="_blank" class="icon-button" aria-label="YouTube">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube" />
+    <span class="label">YouTube</span>
+  </a>
 
-    <a href="https://www.autotrader.com/" target="_blank" class="icon-button" aria-label="Autotrader">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Autotrader_logo_2019.png" alt="Autotrader" />
-        <span class="label">Autotrader</span>
-    </a>
+  <a href="https://sites.google.com/site/unblockedgames77/" target="_blank" class="icon-button" aria-label="Unblocked Games">
+    <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Unblocked Games" />
+    <span class="label">Games</span>
+  </a>
+
+  <a href="https://www.autotrader.com/" target="_blank" class="icon-button" aria-label="Autotrader">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Autotrader_logo_2019.png" alt="Autotrader" />
+    <span class="label">Autotrader</span>
+  </a>
+
+  <!-- Bottom right corner red button -->
+  <a href="https://www.youtube.com/watch?v=DLzxrzFCyOs" target="_blank" class="corner-button" aria-label="Secret YouTube Video">
+    <svg viewBox="0 0 24 24" >
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+  </a>
+
+  <!-- Live Date and Time -->
+  <div id="liveDateTime" aria-live="polite" role="contentinfo"></div>
+
+  <!-- Tic Tac Toe Game -->
+  <section id="ticTacToe" aria-label="Tic Tac Toe Game">
+    <h2>Tic Tac Toe</h2>
+    <div id="board" role="grid" aria-live="polite" aria-relevant="all">
+      <button class="cell" data-index="0" role="gridcell" aria-label="Cell 1"></button>
+      <button class="cell" data-index="1" role="gridcell" aria-label="Cell 2"></button>
+      <button class="cell" data-index="2" role="gridcell" aria-label="Cell 3"></button>
+      <button class="cell" data-index="3" role="gridcell" aria-label="Cell 4"></button>
+      <button class="cell" data-index="4" role="gridcell" aria-label="Cell 5"></button>
+      <button class="cell" data-index="5" role="gridcell" aria-label="Cell 6"></button>
+      <button class="cell" data-index="6" role="gridcell" aria-label="Cell 7"></button>
+      <button class="cell" data-index="7" role="gridcell" aria-label="Cell 8"></button>
+      <button class="cell" data-index="8" role="gridcell" aria-label="Cell 9"></button>
+    </div>
+    <div id="status" aria-live="polite" aria-atomic="true"></div>
+    <button id="resetBtn" aria-label="Reset Tic Tac Toe Game">Reset</button>
+  </section>
+
+  <!-- Lo-fi player bottom-left -->
+  <div id="lofiPlayer" aria-label="Lo-fi Music Player">
+    <button id="playPauseBtn" aria-pressed="false" aria-label="Play Lo-fi Music">▶️</button>
+    <input id="volumeControl" type="range" min="0" max="1" step="0.01" aria-label="Volume control" />
+    <span>Lo-fi Chill</span>
+  </div>
+
+  <audio id="lofiAudio" loop preload="auto" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+  <script>
+    // Dark mode toggle
+    const toggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    function setDarkMode(enabled) {
+      if (enabled) {
+        body.classList.add('dark');
+        toggle.checked = true;
+        toggle.setAttribute('aria-checked', 'true');
+        localStorage.setItem('darkMode', 'true');
+      } else {
+        body.classList.remove('dark');
+        toggle.checked = false;
+        toggle.setAttribute('aria-checked', 'false');
+        localStorage.setItem('darkMode', 'false');
+      }
+    }
+
+    toggle.addEventListener('change', () => {
+      setDarkMode(toggle.checked);
+    });
+
+    // Load dark mode preference
+    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(savedDarkMode);
+
+    // Live date/time
+    const liveDateTime = document.getElementById('liveDateTime');
+    function updateTime() {
+      const now = new Date();
+      const options = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
+      const dateString = now.toLocaleDateString(undefined, options);
+      const timeString = now.toLocaleTimeString(undefined, {hour12: false});
+      liveDateTime.textContent = `${dateString} — ${timeString}`;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    // Tic Tac Toe Game
+    const board = document.getElementById('board');
+    const cells = Array.from(document.querySelectorAll('.cell'));
+    const status = document.getElementById('status');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let gameActive = true;
+    let boardState = ['', '', '', '', '', '', '', '', ''];
+    const player = 'X';
+    const ai = 'O';
+
+    const winningConditions = [
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6]
+    ];
+
+    function checkWin(board, symbol) {
+      return winningConditions.some(combination =>
+        combination.every(index => board[index] === symbol)
+      );
+    }
+
+    function checkDraw(board) {
+      return board.every(cell => cell !== '');
+    }
+
+    function updateStatus(message) {
+      status.textContent = message;
+    }
+
+    function aiMove() {
+      // Simple AI: win if possible, block if needed, else random
+
+      // Try to win
+      for (let i=0; i<9; i++) {
+        if (boardState[i] === '') {
+          boardState[i] = ai;
+          if (checkWin(boardState, ai)) {
+            return i;
+          }
+          boardState[i] = '';
+        }
+      }
+
+      // Try to block player
+      for (let i=0; i<9; i++) {
+        if (boardState[i] === '') {
+          boardState[i] = player;
+          if (checkWin(boardState, player)) {
+            boardState[i] = ai;
+            return i;
+          }
+          boardState[i] = '';
+        }
+      }
+
+      // Pick random empty
+      const emptyIndices = boardState.map((val, idx) => val === '' ? idx : null).filter(v => v !== null);
+      if (emptyIndices.length === 0) return -1;
+      const randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+      boardState[randomIndex] = ai;
+      return randomIndex;
+    }
+
+    function handleCellClick(e) {
+      const index = e.target.getAttribute('data-index');
+      if (!gameActive || boardState[index] !== '') return;
+
+      boardState[index] = player;
+      cells[index].textContent = player;
+      cells[index].classList.add('disabled');
+
+      if (checkWin(boardState, player)) {
+        updateStatus("You win! 🎉");
+        gameActive = false;
+        return;
+      }
+
+      if (checkDraw(boardState)) {
+        updateStatus("It's a draw!");
+        gameActive = false;
+        return;
+      }
+
+      // AI move after short delay
+      updateStatus("Computer is thinking...");
+      gameActive = false;
+      setTimeout(() => {
+        const aiIndex = aiMove();
+        if (aiIndex >= 0) {
+          cells[aiIndex].textContent = ai;
+          cells[aiIndex].classList.add('disabled');
+        }
+        if (checkWin(boardState, ai)) {
+          updateStatus("Computer wins! 😞");
+          gameActive = false;
+          return;
+        }
+        if (checkDraw(boardState)) {
+          updateStatus("It's a draw!");
+          gameActive = false;
+          return;
+        }
+        updateStatus("Your turn.");
+        gameActive = true;
+      }, 500);
+    }
+
+    function resetGame() {
+      boardState = ['', '', '', '', '', '', '', '', ''];
+      cells.forEach(cell => {
+        cell.textContent = '';
+        cell.classList.remove('disabled');
+      });
+      gameActive = true;
+      updateStatus("Your turn.");
+    }
+
+    cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+    resetBtn.addEventListener('click', resetGame);
+
+    resetGame();
+
+    // Lo-fi Player
+    const audio = document.getElementById('lofiAudio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeControl = document.getElementById('volumeControl');
+
+    // Load saved volume and play state
+    const savedVolume = localStorage.getItem('lofiVolume');
+    const savedPlaying = localStorage.getItem('lofiPlaying');
+
+    if (savedVolume !== null) {
+      audio.volume = savedVolume;
+      volumeControl.value = savedVolume;
+    } else {
+      audio.volume = 0.5;
+      volumeControl.value = 0.5;
+    }
+
+    function updatePlayButton() {
+      if (!audio.paused) {
+        playPauseBtn.textContent = '⏸️';
+        playPauseBtn.setAttribute('aria-pressed', 'true');
+        localStorage.setItem('lofiPlaying', 'true');
+      } else {
+        playPauseBtn.textContent = '▶️';
+        playPauseBtn.setAttribute('aria-pressed', 'false');
+        localStorage.setItem('lofiPlaying', 'false');
+      }
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(() => {
+          // Could not autoplay, user interaction required
+        });
+      } else {
+        audio.pause();
+      }
+      updatePlayButton();
+    });
+
+    volumeControl.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+      localStorage.setItem('lofiVolume', audio.volume);
+    });
+
+    // Auto-play if saved state was playing
+    window.addEventListener('load', () => {
+      if (savedPlaying === 'true') {
+        audio.play().catch(() => {
+          // Autoplay blocked until user clicks play button
+        });
+      }
+      updatePlayButton();
+    });
+  </script>
 
 </body>
 </html>
